@@ -18,5 +18,7 @@ public class Main {
         List<PokemonNoArquivo> pokemonsBytes = criarArquivo.criarPokemonParaOArquivo(pokemons);
         escreverArquivoFinal(pokemonsBytes, "data/arquivo.bin");
         debugLer7PrimeirosPokemons("data/arquivo.bin");
+
+        MenuPrincipal.mainMenu(args);
     }
 }
