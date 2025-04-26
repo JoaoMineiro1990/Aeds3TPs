@@ -14,7 +14,8 @@ public class Main {
         List<PokemonNoArquivo> pokemonsBytes = CriarArquivo.criarPokemonParaOArquivo(pokemons);
         // 3. Criar lista invertida binária
         ListaInvertidaBinaria listaInvertida = new ListaInvertidaBinaria(caminhoListaInvertida);
-        listaInvertida.menuListaInvertida(caminhoArquivo);
-
+        //listaInvertida.menuListaInvertida(caminhoArquivo);
+        
+        MenuPrincipal.mainMenu(args);
     }
 }
