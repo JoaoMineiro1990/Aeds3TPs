@@ -2,7 +2,7 @@ package Classes.CRUDbinario;
 
 import Classes.Pokemon;
 import Classes.PokemonNoArquivo;
-import Classes.criarArquivo;
+import Classes.CriarArquivo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -30,9 +30,9 @@ public class Criar {
                         throw new RuntimeException("Linha aleatória fora do tamanho do arquivo!");
                     }
                     if (i == linhaAleatoria) {
-                        linha = criarArquivo.posicoesVazias(linha);
-                        List<String> dados = criarArquivo.SplitInteligente(linha);
-                        pokemonSelecionado = criarArquivo.criarPokemonDoSplit(dados);
+                        linha = CriarArquivo.posicoesVazias(linha);
+                        List<String> dados = CriarArquivo.SplitInteligente(linha);
+                        pokemonSelecionado = CriarArquivo.criarPokemonDoSplit(dados);
                     }
                 }
             }

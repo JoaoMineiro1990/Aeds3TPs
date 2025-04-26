@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static Classes.PokemonNoArquivo.contarBytes;
 
-public class criarArquivo {
+public class CriarArquivo {
 
     public static long dataParaEpoch(String dataStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -5,8 +5,8 @@ import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import static Classes.criarArquivo.debugLer5UltimosPokemons;
-import static Classes.criarArquivo.debugLer7PrimeirosPokemons;
+import static Classes.CriarArquivo.debugLer5UltimosPokemons;
+import static Classes.CriarArquivo.debugLer7PrimeirosPokemons;
 
 public class Ler {
 
