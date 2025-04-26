@@ -40,7 +40,7 @@ public class criarArquivo {
         return items;
     }
 
-    static String posicoesVazias(String linha) {
+    public static String posicoesVazias(String linha) {
         return linha.replaceAll(",,", ",null,");
     }
 
@@ -268,4 +268,78 @@ public class criarArquivo {
             return "";
         }
     }
+
+    public static void debugLer5UltimosPokemons(String caminhoArquivo) {
+        try (RandomAccessFile raf = new RandomAccessFile(caminhoArquivo, "r")) {
+            System.out.println("--- DEBUG: 5 ÚLTIMOS POKÉMONS ---");
+
+            // 1. Ler o último ID salvo no início do arquivo
+            int ultimoId = raf.readInt();
+            System.out.println("ULTIMO ID DEBBUG " + ultimoId);
+            int idParaComecar = ultimoId - 4;
+
+            if (idParaComecar < 0) idParaComecar = 0;
+
+            boolean comecarAImprimir = false;
+            int pokemonsImpressos = 0;
+
+            while (raf.getFilePointer() < raf.length()) {
+                // Ler os campos
+                int id = raf.readInt();
+                boolean cova = raf.readBoolean();
+                int tamanhoBytes = raf.readInt();
+
+                int numberPokedex = raf.readInt();
+                String name = lerString(raf);
+                String type1 = lerString(raf);
+                String type2 = lerString(raf);
+                String abilities = lerString(raf);
+
+                int hp = raf.readInt();
+                int att = raf.readInt();
+                int def = raf.readInt();
+                int spa = raf.readInt();
+                int spd = raf.readInt();
+                int spe = raf.readInt();
+                int bst = raf.readInt();
+
+                long dataEpoch = raf.readLong();
+
+                // Verificar se deve começar a imprimir
+                if (id >= idParaComecar) {
+                    comecarAImprimir = true;
+                }
+
+                if (comecarAImprimir) {
+                    System.out.println("ID: " + id);
+                    System.out.println("Cova: " + cova);
+                    System.out.println("TamanhoBytes: " + tamanhoBytes);
+                    System.out.println("NumberPokedex: " + numberPokedex);
+                    System.out.println("Name: " + name);
+                    System.out.println("Type1: " + (type1.isEmpty() ? "null" : type1));
+                    System.out.println("Type2: " + (type2.isEmpty() ? "null" : type2));
+                    System.out.println("Abilities: " + abilities);
+                    System.out.println("HP: " + hp);
+                    System.out.println("ATT: " + att);
+                    System.out.println("DEF: " + def);
+                    System.out.println("SPA: " + spa);
+                    System.out.println("SPD: " + spd);
+                    System.out.println("SPE: " + spe);
+                    System.out.println("BST: " + bst);
+                    System.out.println("DataEpoch: " + dataEpoch);
+                    System.out.println("-----------------------------\n");
+
+                    pokemonsImpressos++;
+                    if (pokemonsImpressos == 5) {
+                        break;
+                    }
+                }
+            }
+
+            System.out.println("--- FIM DEBUG ---");
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao ler Pokémon do arquivo", e);
+        }
+    }
+
 }
