@@ -3,7 +3,8 @@
 ## ✨ Descrição
 
 Este projeto implementa um **CRUD** completo de Pokémons utilizando diversas estruturas de dados:
-
+- 🐉 **LLM** foi utilizado nesse projeto.
+- 📂 **Artigos** códigos e estruturas retirados e adaptados de artigos especializados.
 - 🗂️ **Arquivo Binário** para armazenamento principal dos Pokémons.
 - 🪳 **Hash Extensível** para acesso rápido por nome.
 - 🔀 **Lista Invertida** para gerenciamento de Pokémons ativos e atualizações.
