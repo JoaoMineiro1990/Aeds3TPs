@@ -1,4 +1,7 @@
-package Classes;
+package Classes.Arquivo;
+
+import Classes.Pokemon.Pokemon;
+import Classes.Pokemon.PokemonNoArquivo;
 
 import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static Classes.PokemonNoArquivo.contarBytes;
+import static Classes.Pokemon.PokemonNoArquivo.contarBytes;
 
 public class CriarArquivo {
 

@@ -1,4 +1,4 @@
-package Classes;
+package Classes.Pokemon;
 
 public class PokemonNaListaInvertida {
     private int id;

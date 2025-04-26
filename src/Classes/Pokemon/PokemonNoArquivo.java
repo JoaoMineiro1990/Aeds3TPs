@@ -1,4 +1,4 @@
-package Classes;
+package Classes.Pokemon;
 import java.nio.charset.StandardCharsets;
 
 public class PokemonNoArquivo {

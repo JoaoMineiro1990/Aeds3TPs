@@ -1,4 +1,4 @@
-package Classes;
+package Classes.Pokemon;
 
 import java.time.Instant;
 import java.time.LocalDate;

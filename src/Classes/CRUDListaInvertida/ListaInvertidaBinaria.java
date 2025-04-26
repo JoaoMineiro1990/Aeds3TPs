@@ -1,9 +1,4 @@
-package Classes;
-
-import Classes.CRUDListaInvertida.Criar;
-import Classes.CRUDListaInvertida.Delete;
-import Classes.CRUDListaInvertida.Ler;
-import Classes.CRUDListaInvertida.Update;
+package Classes.CRUDListaInvertida;
 
 import java.util.Scanner;
 

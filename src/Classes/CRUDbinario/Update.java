@@ -5,9 +5,9 @@ import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import Classes.Pokemon;
-import Classes.PokemonNoArquivo;
-import static Classes.PokemonNoArquivo.contarBytes;
+import Classes.Pokemon.Pokemon;
+import Classes.Pokemon.PokemonNoArquivo;
+import static Classes.Pokemon.PokemonNoArquivo.contarBytes;
 
 
 public class Update {

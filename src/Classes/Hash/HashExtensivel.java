@@ -1,17 +1,17 @@
-package Classes;
-
-
+package Classes.Hash;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static Classes.CRUDbinario.Delete.deletarPokemonPorId;
-
+import static Classes.Menu.MenuPrincipal.RED;
+import static Classes.Menu.MenuPrincipal.RESET;
+import static Classes.Menu.MenuPrincipal.YELLOW;
 public class HashExtensivel {
     private final String pastaBuckets;
     private final String caminhoDiretorio;
     private int profundidadeGlobal;
-    private final int capacidadeBucket = 100;
+    private final int capacidadeBucket = 150;
 
     public HashExtensivel(String pastaBuckets, String caminhoDiretorio) {
         this.pastaBuckets = pastaBuckets;
@@ -102,7 +102,7 @@ public class HashExtensivel {
             }
         }
     }
-    private void apagarTudoAntesDeCriar() {
+    public void apagarTudoAntesDeCriar() {
         try {
             // Apaga todos os buckets antigos
             File pasta = new File(pastaBuckets);
@@ -232,10 +232,6 @@ public class HashExtensivel {
                 }
             }
 
-
-
-
-
             System.out.println("❌ Pokémon \"" + nomeProcurado + "\" não encontrado em nenhum bucket.");
 
         } catch (IOException e) {
@@ -355,7 +351,6 @@ public class HashExtensivel {
                 bucket.writeLong(offsetPokemon);
                 bucket.seek(4);
                 bucket.writeInt(quantidade + 1);
-                System.out.println("✅ Inserido no " + bucketPath);
                 return true;
             }
             return false;
@@ -445,7 +440,7 @@ public class HashExtensivel {
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
-    private void mostrarEstadoHash() {
+    public void mostrarEstadoHash() {
         try (RandomAccessFile dir = new RandomAccessFile(caminhoDiretorio, "r")) {
             int profundidade = dir.readInt();
             System.out.println("Profundidade Global: " + profundidade);
@@ -525,12 +520,81 @@ public class HashExtensivel {
         }
     }
     private int buscarIdNoArquivo(String caminhoArquivo, long offset) throws IOException {
-        if (offset == 0) return -1; // Se o offset já for 0, não tem nada para buscar.
+        if (offset == 0) return -1;
 
         try (RandomAccessFile raf = new RandomAccessFile(caminhoArquivo, "r")) {
-            raf.seek(offset); // Vai direto até o offset indicado.
-            int id = raf.readInt(); // Lê o ID do Pokémon.
+            raf.seek(offset);
+            int id = raf.readInt();
             return id;
+        }
+    }
+    public void buscarPokemonAleatorioNaHash(String caminhoCSV) {
+        try {
+            List<String> linhas = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(caminhoCSV))) {
+                String linha;
+                while ((linha = br.readLine()) != null) {
+                    linhas.add(linha);
+                }
+            }
+            if (linhas.size() <= 1) {
+                System.out.println("⚠️ CSV vazio ou apenas com cabeçalho.");
+                return;
+            }
+
+            Random random = new Random();
+            int indiceAleatorio = random.nextInt(linhas.size() - 1) + 1;
+            String linhaEscolhida = linhas.get(indiceAleatorio);
+
+            // PASSO 3: Pegar o nome do Pokémon da linha
+            String[] campos = linhaEscolhida.split(",");
+            String nomeProcurado = campos[1];
+
+            System.out.println(YELLOW + "\n🎲 Estamos sorteando um Pokémon aleatoriamente para você!" + RESET);
+            System.out.println(YELLOW + "🔎 Assim você não precisa acertar o nome do Pokémon perfeitamente!" + RESET);
+            System.out.println("\n🔎 Pokémon sorteado: " + nomeProcurado);
+
+            // PASSO 4: Procurar esse nome na Hash
+            try (RandomAccessFile dir = new RandomAccessFile(caminhoDiretorio, "r")) {
+                dir.readInt(); // profundidade global
+
+                while (dir.getFilePointer() < dir.length()) {
+                    int indice = dir.readInt();
+                    String bucketPath = dir.readUTF();
+
+                    File bucketFile = new File(pastaBuckets + "/" + bucketPath);
+                    if (!bucketFile.exists()) continue;
+
+                    try (RandomAccessFile bucket = new RandomAccessFile(bucketFile, "r")) {
+                        bucket.readInt(); // profundidade local
+                        int quantidade = bucket.readInt();
+
+                        for (int i = 0; i < quantidade; i++) {
+                            String nome = lerString(bucket);
+                            long offset = bucket.readLong();
+
+                            if (nome.equalsIgnoreCase(nomeProcurado)) {
+                                System.out.println("\n📁 Pokémon \"" + nome + "\" encontrado no bucket: " + bucketPath);
+                                if (offset == 0) {
+                                    System.out.println("☠️ Status: DELETADO (offset = 0)");
+                                } else {
+                                    System.out.println("✅ Status: VIVO (offset = " + offset + ")");
+                                }
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                System.out.println("❌ Pokémon \"" + nomeProcurado + "\" não encontrado em nenhum bucket.");
+
+            } catch (IOException e) {
+                throw new RuntimeException("Erro ao buscar Pokémon na hash", e);
+            }
+
+        } catch (IOException e) {
+            System.out.println(RED + "\n>>> Erro ao ler o CSV para buscar Pokémon aleatório!" + RESET);
+            e.printStackTrace();
         }
     }
 

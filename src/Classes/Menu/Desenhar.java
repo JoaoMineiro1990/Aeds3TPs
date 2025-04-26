@@ -1,3 +1,5 @@
+package Classes.Menu;
+
 import java.util.Scanner;
 
 public class Desenhar {

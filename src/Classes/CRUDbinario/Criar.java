@@ -1,8 +1,8 @@
 package Classes.CRUDbinario;
 
-import Classes.Pokemon;
-import Classes.PokemonNoArquivo;
-import Classes.CriarArquivo;
+import Classes.Pokemon.Pokemon;
+import Classes.Pokemon.PokemonNoArquivo;
+import Classes.Arquivo.CriarArquivo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Random;
 
-import static Classes.PokemonNoArquivo.contarBytes;
+import static Classes.Pokemon.PokemonNoArquivo.contarBytes;
 
 public class Criar {
 
