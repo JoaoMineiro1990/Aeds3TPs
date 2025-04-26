@@ -10,19 +10,15 @@ import java.util.Scanner;
 public class ListaInvertidaBinaria {
 
     private String caminhoListaInvertida;
-
     public ListaInvertidaBinaria(String caminhoListaInvertida) {
         this.caminhoListaInvertida = caminhoListaInvertida;
     }
-
     public String getCaminhoListaInvertida() {
         return caminhoListaInvertida;
     }
-
     public void setCaminhoListaInvertida(String caminhoListaInvertida) {
         this.caminhoListaInvertida = caminhoListaInvertida;
     }
-
     public void menuListaInvertida(String caminhoDoArquivoBinarioPokemons) {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;

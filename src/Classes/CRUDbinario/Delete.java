@@ -37,7 +37,7 @@ public class Delete {
             }
         }
     }
-    private static void deletarPokemonPorId(String caminhoArquivo, int idProcurado) {
+    public static void deletarPokemonPorId(String caminhoArquivo, int idProcurado) {
         try (RandomAccessFile raf = new RandomAccessFile(caminhoArquivo, "rw")) {
             int ultimoId = raf.readInt();
             if (idProcurado <= 0 || idProcurado > ultimoId) {
