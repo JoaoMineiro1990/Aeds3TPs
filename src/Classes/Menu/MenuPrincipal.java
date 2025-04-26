@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class MenuPrincipal{
 
-    // Códigos ANSI para cores pra ficar bunitinho - no vs code tenho certeza que funciona 
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -20,7 +19,6 @@ public class MenuPrincipal{
     public static final String BLUE = "\u001B[34m";
     public static final String CYAN = "\u001B[36m";
     public static final String PURPLE = "\u001B[35m";
-    // === Códigos de Caminhos Fixos ===
     public static final String CAMINHO_LISTA_INVERTIDA = "data/listaInvertida.bin";
     public static final String CAMINHO_ARQUIVO_BINARIO = "data/arquivo.bin";
     public static final String CAMINHO_CSV_POKEMONS = "data/dados_modificados.csv";
