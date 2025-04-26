@@ -232,6 +232,10 @@ public class HashExtensivel {
                 }
             }
 
+
+
+
+
             System.out.println("❌ Pokémon \"" + nomeProcurado + "\" não encontrado em nenhum bucket.");
 
         } catch (IOException e) {
