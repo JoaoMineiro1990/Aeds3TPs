@@ -8,6 +8,7 @@ import java.util.*;
 import static Classes.CRUDbinario.Delete.deletarPokemonPorId;
 
 public class HashExtensivel {
+
     private final String pastaBuckets;
     private final String caminhoDiretorio;
     private int profundidadeGlobal;
@@ -102,7 +103,7 @@ public class HashExtensivel {
             }
         }
     }
-    private void apagarTudoAntesDeCriar() {
+    public void apagarTudoAntesDeCriar() {
         try {
             // Apaga todos os buckets antigos
             File pasta = new File(pastaBuckets);

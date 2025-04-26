@@ -1,4 +1,5 @@
 import Classes.ListaInvertidaBinaria;
+import Classes.HashExtensivel;
 import Classes.CRUDListaInvertida.Criar;
 import Classes.CRUDListaInvertida.Delete;
 import Classes.CRUDListaInvertida.Ler;
@@ -19,9 +20,12 @@ public class MenuPrincipal{
 
 
     static ListaInvertidaBinaria listaInvertida = new ListaInvertidaBinaria("data/listaInvertida.bin");
+
     // futuramente
     //* static ArvoreB arvoreB = new ArvoreB("data/arvoreB.bin");
+
     //* static Hash hash = new Hash("data/hash.bin");
+    static HashExtensivel hash = new HashExtensivel("data/dados_modificados.csv", "data/hash.bin");
 
     public static void mainMenu(String[] args) {
 
@@ -47,7 +51,7 @@ public class MenuPrincipal{
             int pesoEstrutura = Desenhar.desenharMenuEstruturas(scanner);
 
             if (pesoEstrutura == -1) {
-                System.out.println(YELLOW + ">>> Operação cancelada! Retornando ao menu principal..." + RESET);
+                System.out.println(RED + ">>> Operação cancelada! Retornando ao menu principal..." + RESET);
                 continue;
             }
 
@@ -62,60 +66,70 @@ public class MenuPrincipal{
         System.out.print(CYAN + "\nProcessando" + RESET);
         Desenhar.carregarPontos();
         
+        //LISTA INVERTIDA
         String caminhoListaInvertida = listaInvertida.getCaminhoListaInvertida();
         String caminhoDoArquivoBinarioPokemons = "data/arquivo.bin"; // Caminho do arquivo binário de Pokémons
 
+        //HASH
+        //String caminhoArquivoPokemons = HashExtensivel.getCaminhoArquivoPokemons();
+        //? Não sei de onde vc ta pegando o caminhoArquivoPokemons e o que ele deveria ser,
+        //? não to sabendo o que mandar no contrutor padrão do HashExtensivel
+
+        //ÁRVORE B
+        
 
         switch (codigo) {
             case 2:
-                // Chamada da função CREATE em Árvore B
-                System.out.println(GREEN + "\n>>> CREATE em Árvore B" + RESET);
+                // CREATE em Árvore B
+                System.out.println(GREEN + "\n>>> CREATE Árvore B" + RESET);
                 break;
             case 6:
-                // Chamada da função CREATE em Hash
-                System.out.println(GREEN + "\n>>> CREATE em Hash" + RESET);
+                // CREATE em Hash
+                System.out.println(GREEN + "\n>>> CREATE Hash" + RESET);
+                //HashExtensivel.apagarTudoAntesDeCriar(); // 💣 Nova função que apaga tudo
+                //HashExtensivel.criarAPartirDoArquivoBinario(caminhoDoArquivoBinarioPokemons); // 💥 Cria do zero
                 break;
             case 10:
-                // Chamada da função CREATE em Lista Invertida
-                System.out.println(GREEN + "\n>>> CREATE em Lista Invertida" + RESET);
+                // CREATE em Lista Invertida
+                System.out.println(GREEN + "\n>>> CREATE Lista Invertida" + RESET);
                 Criar.criarLista(caminhoListaInvertida, caminhoDoArquivoBinarioPokemons);
                 break;
             case 3:
-                // Chamada da função READ em Árvore B
+                // READ em Árvore B
                 System.out.println(BLUE + "\n>>> READ em Árvore B" + RESET);
                 break;
             case 7:
-                // Chamada da função READ em Hash
+                // READ em Hash
                 System.out.println(BLUE + "\n>>> READ em Hash" + RESET);
                 break;
             case 11:
-                // Chamada da função READ em Lista Invertida
+                // READ em Lista Invertida
                 System.out.println(BLUE + "\n>>> READ em Lista Invertida" + RESET);
                 Ler.lerListaInvertida(caminhoListaInvertida);
                 break;
             case 4:
-                // Chamada da função UPDATE em Árvore B
+                // UPDATE em Árvore B
                 System.out.println(YELLOW + "\n>>> UPDATE em Árvore B" + RESET);
                 break;
             case 8:
-                // Chamada da função UPDATE em Hash
+                // UPDATE em Hash
                 System.out.println(YELLOW + "\n>>> UPDATE em Hash" + RESET);
                 break;
             case 12:
-                // Chamada da função UPDATE em Lista Invertida
+                // UPDATE em Lista Invertida
                 System.out.println(YELLOW + "\n>>> UPDATE em Lista Invertida" + RESET);
                 Update.procurarPokemonParaAtualizar(caminhoListaInvertida,caminhoDoArquivoBinarioPokemons);
                 break;
             case 5:
-                // Chamada da função DELETE em Árvore B
+                // DELETE em Árvore B
                 System.out.println(RED + "\n>>> DELETE em Árvore B" + RESET);
                 break;
             case 9:
-                // Chamada da função DELETE em Hash
+                // DELETE em Hash
                 System.out.println(RED + "\n>>> DELETE em Hash " + RESET);
                 break;
             case 13:
-                // Chamada da função DELETE em Lista Invertida
+                // DELETE em Lista Invertida
                 System.out.println(RED + "\n>>> DELETE em Lista Invertida " + RESET);
                 Delete.deletarPokemonListaInvertida(caminhoListaInvertida);
                 break;
