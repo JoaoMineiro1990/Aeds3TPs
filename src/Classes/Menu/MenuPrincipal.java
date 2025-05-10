@@ -1,5 +1,7 @@
 package Classes.Menu;
 
+import Classes.ArvoreBMais.ArvoreBMais_String_Int;
+import Classes.ArvoreBMais.CriarIndiceBMais;
 import Classes.CRUDListaInvertida.*;
 import Classes.Hash.HashExtensivel;
 import Classes.Pokemon.Pokemon;
@@ -9,9 +11,11 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
+import static Classes.ArvoreBMais.ArvoreBMais_String_Int.*;
+
 
 public class MenuPrincipal{
-
+    private static ArvoreBMais_String_Int arvoreBMais = null;
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -24,12 +28,13 @@ public class MenuPrincipal{
     public static final String CAMINHO_CSV_POKEMONS = "data/dados_modificados.csv";
     public static final String CAMINHO_PASTA_BUCKETS = "data/buckets";
     public static final String CAMINHO_DIRETORIO_HASH = "data/diretorioHash.bin";
+    public static final String CAMINHO_ARQUIVO_INDICE = "data/indice.bin";
+    private static final Scanner scanner = new Scanner(System.in);
 
     static ListaInvertidaBinaria listaInvertida = new ListaInvertidaBinaria("data/listaInvertida.bin");
 
     public static void mainMenu(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
         boolean flag = true;
 
         // Cabeçalho do TP
@@ -90,15 +95,23 @@ public class MenuPrincipal{
 
         switch (codigo) {
             case 1:
+                System.out.println("aki caso 1");
                 break;
             case 2:
-                System.out.println(RED + "\nFiz nao, nao consegui" + RESET);
+                System.out.println(GREEN + "\n>>> Criando Árvore B+" + RESET);
+                try {
+                    arvoreBMais = new ArvoreBMais_String_Int(5, CAMINHO_ARQUIVO_INDICE);
+                    CriarIndiceBMais.lerSalvandoPares(CAMINHO_ARQUIVO_BINARIO, CAMINHO_ARQUIVO_INDICE);
+                    System.out.println(GREEN + "✅ Árvore B+ criada com sucesso!" + RESET);
+                } catch (Exception e) {
+                    System.out.println(RED + "\n>>> Erro ao criar Árvore B+" + RESET);
+                    e.printStackTrace();
+                }
                 break;
             case 6:
                 System.out.println(GREEN + "\n>>> Criando Hash Extensível a partir do Arquivo Binário" + RESET);
 
                 try {
-                    // Apaga se existir e recria
                     hashExtensivel.apagarTudoAntesDeCriar();
                     hashExtensivel.criarAPartirDoArquivoBinario(CAMINHO_ARQUIVO_BINARIO);
 
@@ -119,9 +132,21 @@ public class MenuPrincipal{
                     e.printStackTrace();
                 }
                 break;
+
             case 3:
-                System.out.println(BLUE + "\n>>> READ em Árvore B" + RESET);
+                System.out.println(BLUE + "\n>>> READ em Árvore B+" + RESET);
+                if (arvoreBMais == null) {
+                    System.out.println(RED + "🚨 Árvore B+ ainda não foi criada!" + RESET);
+                    return;
+                }
+                try {
+                    menuBuscaPokemon(arvoreBMais, CAMINHO_ARQUIVO_BINARIO, scanner); //
+                } catch (Exception e) {
+                    System.out.println(RED + "❌ Erro ao buscar Pokémon na árvore B+!" + RESET);
+                    e.printStackTrace();
+                }
                 break;
+
             case 7:
                 System.out.println(BLUE + "\n>>> READ em Hash" + RESET);
                 try {
@@ -143,8 +168,19 @@ public class MenuPrincipal{
                 System.out.println(YELLOW + "\n>>> se o codigo nao achou o pokemon n esqueca de CRIAR a lista" + RESET);
                 break;
             case 4:
-                System.out.println(YELLOW + "\n>>> UPDATE em Árvore B" + RESET);
+                System.out.println(YELLOW + "\n>>> UPDATE em Árvore B+" + RESET);
+                if (arvoreBMais == null) {
+                    System.out.println(RED + "🚨 Árvore B+ ainda não foi criada!" + RESET);
+                    return;
+                }
+                try {
+                    menuAtualizarPorNomeViaIndice(arvoreBMais, CAMINHO_ARQUIVO_BINARIO, scanner);
+                } catch (Exception e) {
+                    System.out.println(RED + "❌ Erro ao atualizar Pokémon na árvore B+!" + RESET);
+                    e.printStackTrace();
+                }
                 break;
+
             case 8:
                 System.out.println(YELLOW + "\n>>> UPDATE em Hash" + RESET);
                 try {
@@ -179,7 +215,17 @@ public class MenuPrincipal{
                 }
                 break;
             case 5:
-                System.out.println(RED + "\n>>> DELETE em Árvore B" + RESET);
+                System.out.println(RED + "\n>>> DELETE em Árvore B+" + RESET);
+                if (arvoreBMais == null) {
+                    System.out.println(RED + "🚨 Árvore B+ ainda não foi criada!" + RESET);
+                    return;
+                }
+                try {
+                    menuDeletarPokemon(arvoreBMais, CAMINHO_ARQUIVO_BINARIO, scanner);
+                } catch (Exception e) {
+                    System.out.println(RED + "❌ Erro ao deletar Pokémon na árvore B+!" + RESET);
+                    e.printStackTrace();
+                }
                 break;
             case 9:
                 System.out.println(RED + "\n>>> DELETE em Hash" + RESET);

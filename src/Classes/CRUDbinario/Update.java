@@ -245,12 +245,8 @@ public class Update {
                 if (escolha == 1) {
                     System.out.print("Digite o novo tipo 1: ");
                     String novoTipo1 = scanner.nextLine();
-                    System.out.print("Digite o novo tipo 2 (ou ENTER para deixar null): ");
-                    String novoTipo2 = scanner.nextLine();
-
                     pokemonAntigo.setType1(novoTipo1);
-                    pokemonAntigo.setType2(novoTipo2.isEmpty() ? null : novoTipo2);
-                    break; // saiu do while, porque deu update
+                    break;
                 } else {
                     System.out.println("⚠️ Você precisa mudar o tipo! Tente novamente.");
                 }
