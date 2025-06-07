@@ -14,8 +14,6 @@ public class Main {
         //arvore.menuBuscaPokemon(arvore, caminhoArquivo);
         //arvore.menuDeletarPokemon(arvore, "data/arquivo.bin");
         //arvore.menuAtualizarPorNomeViaIndice(arvore, "data/arquivo.bin");
-
-
     }
 }
 

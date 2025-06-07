@@ -64,6 +64,18 @@ public class Desenhar {
 
     public static void desenharMenuPrincipal() {
         System.out.println("\n╔═══════════════════════════════════════════╗");
+        System.out.println("║              MENU PRINCIPAL               ║");
+        System.out.println("╠═══════════════════════════════════════════╣");
+        System.out.println("║ 1 - CASAMENTO DE PADRÕES                  ║");
+        System.out.println("║ 2 - COMPRESSÃO DE DADOS                   ║");
+        System.out.println("║ 0 - SAIR                                  ║");
+        System.out.println("╚═══════════════════════════════════════════╝");
+        System.out.print("Escolha uma opção: ");
+    }
+
+    /* 
+    public static void desenharMenuPrincipalCRUD() {
+        System.out.println("\n╔═══════════════════════════════════════════╗");
         System.out.println("║           MENU PRINCIPAL - CRUD           ║");
         System.out.println("╠═══════════════════════════════════════════╣");
         System.out.println("║ 1 - CREATE                                ║");
@@ -75,6 +87,7 @@ public class Desenhar {
         System.out.print("Escolha uma opção: ");
     }
 
+    
     public static int desenharMenuEstruturas(Scanner scanner) {
         System.out.println("\n╔═══════════════════════════════════════════╗");
         System.out.println("║         ESCOLHA A ESTRUTURA DE DADOS      ║");
@@ -101,7 +114,31 @@ public class Desenhar {
                 System.out.println(RED + ">>> Estrutura inválida! Retornando ao menu principal..." + RESET);
                 return -1;
         }
+    }*/
+
+    public static void desenharMenuCompressao() {
+        System.out.println("\n╔═══════════════════════════════════════════╗");
+        System.out.println("║         MENU - COMPRESSÃO DE DADOS        ║");
+        System.out.println("╠═══════════════════════════════════════════╣");
+        System.out.println("║ 1 - HUFFMAN                               ║");
+        System.out.println("║ 2 - LZW                                   ║");
+        System.out.println("║ 3 - DESCOMPRIMIR                          ║");
+        System.out.println("║ 0 - SAIR                                  ║");
+        System.out.println("╚═══════════════════════════════════════════╝");
+        System.out.print("Escolha uma opção: ");
     }
+    
+    public static void desenharMenuCasamentoPadroes() {
+    System.out.println("\n╔═══════════════════════════════════════════╗");
+    System.out.println("║         MENU - CASAMENTO DE PADRÕES       ║");
+    System.out.println("╠═══════════════════════════════════════════╣");
+    System.out.println("║ 1 - KMP                                   ║");
+    System.out.println("║ 2 - BOYER-MOORE                           ║");
+    System.out.println("║ 0 - SAIR                                  ║");
+    System.out.println("╚═══════════════════════════════════════════╝");
+    System.out.print("Escolha uma opção: ");
+}
+
 
     public static void carregarPontos() {
         try {
