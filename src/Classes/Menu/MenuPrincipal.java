@@ -1,5 +1,6 @@
 package Classes.Menu;
 
+
 import Classes.ArvoreBMais.ArvoreBMais_String_Int;
 import Classes.ArvoreBMais.CriarIndiceBMais;
 import Classes.CRUDListaInvertida.*;
@@ -62,30 +63,78 @@ public class MenuPrincipal{
         }
 
         // Loop principal do Menu
-        while (flag) {
+        while (flag) { 
+            //! olhar o flag aqui dps
+
             Desenhar.desenharMenuPrincipal();
+            
             int operacao = scanner.nextInt();
 
-            if (operacao == 0) {
+            if (operacao == 1) {
+                System.out.println("\n");
+                Desenhar.desenharMenuCasamentoPadroes();
+                //chamar as operações de Casamento de Padroes
+                int casamento = scanner.nextInt();
+
+                if(casamento == 1){
+                    //chamar KMP
+                }
+                else if(casamento ==2){
+                    //chamar Boyer-Moore
+                }
+                else if(casamento ==0){
+                    System.out.println("\n" + PURPLE + ">>> Retornando ao menu principal..." + RESET);
+                    continue; // Volta para o início do loop
+                }
+                else{
+                    System.out.println(RED + "\n>>> Opção inválida! Retornando ao menu principal..." + RESET);
+                    continue; // Volta para o início do loop
+                }
+
+                System.out.println("\n");
+            }
+            else if (operacao == 2){
+                Desenhar.desenharMenuCompressao();
+                //chamar as operações de Compressão
+
+                int compressao = scanner.nextInt();
+
+                if(compressao == 1){
+                    //chamar Huffman
+                }
+                else if(compressao ==2){
+                    //chamar LZW
+                }
+                else if(compressao ==3){
+                    //chamar Descomprimir
+                }
+                else if(compressao ==0){
+                    System.out.println("\n" + PURPLE + ">>> Retornando ao menu principal..." + RESET);
+                    continue; // Volta para o início do loop
+                }
+                else{
+                    System.out.println(RED + "\n>>> Opção inválida! Retornando ao menu principal..." + RESET);
+                    continue; // Volta para o início do loop
+                }
+
+                System.out.println("\n");
+            }
+            else if (operacao == 0) {
                 System.out.println("\n" + PURPLE + ">>> Saindo do programa... Até mais!" + RESET);
                 Desenhar.desenharPikachu();
-                break;
+                flag = false; // Sai do loop principal
             }
-
-            int pesoEstrutura = Desenhar.desenharMenuEstruturas(scanner);
-
-            if (pesoEstrutura == -1) {
-                System.out.println(YELLOW + ">>> Operação cancelada! Retornando ao menu principal..." + RESET);
-                continue;
+            else{
+                System.out.println(RED + "\n>>> Opção inválida! Por favor, escolha uma opção válida." + RESET);
+                continue; // Volta para o início do loop
             }
-
-            int codigo = operacao + pesoEstrutura;
-            executarOperacao(codigo);
         }
 
         scanner.close();
     }
-
+    
+    /* 
+    public int codigo = 0;
     private static void executarOperacao(int codigo) {
         HashExtensivel hashExtensivel = new HashExtensivel(CAMINHO_PASTA_BUCKETS, CAMINHO_DIRETORIO_HASH);
         System.out.print(CYAN + "\nProcessando" + RESET);
@@ -303,6 +352,6 @@ public class MenuPrincipal{
                 System.out.println(RED + "\n>>> Código inválido! Retornando ao menu principal..." + RESET);
                 break;
         }
-    }
+    }*/
 
 }
