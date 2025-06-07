@@ -7,10 +7,11 @@ import Classes.CRUDListaInvertida.*;
 import Classes.Hash.HashExtensivel;
 import Classes.Pokemon.Pokemon;
 import Classes.Pokemon.PokemonNoArquivo;
-
+import Classes.Menu.Desenhar;
 import java.io.File;
 import java.util.List;
 import java.util.Scanner;
+import Classes.Casamento.KMP;
 
 import static Classes.ArvoreBMais.ArvoreBMais_String_Int.*;
 
@@ -78,6 +79,10 @@ public class MenuPrincipal{
 
                 if(casamento == 1){
                     //chamar KMP
+                    System.out.println(GREEN + "\n>>> Iniciando busca com KMP..." + RESET);
+                    KMP kmp = new KMP();
+                    kmp.kmpStart();
+                    
                 }
                 else if(casamento ==2){
                     //chamar Boyer-Moore
