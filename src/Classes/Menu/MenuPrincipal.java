@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 import Classes.Casamento.KMP;
+import Classes.Casamento.BoyerMoore;
 
 import static Classes.ArvoreBMais.ArvoreBMais_String_Int.*;
 
@@ -82,10 +83,15 @@ public class MenuPrincipal{
                     System.out.println(GREEN + "\n>>> Iniciando busca com KMP..." + RESET);
                     KMP kmp = new KMP();
                     kmp.kmpStart();
+                    flag = true; // Volta para o início do loop principal
                     
                 }
                 else if(casamento ==2){
                     //chamar Boyer-Moore
+                    System.out.println(GREEN + "\n>>> Iniciando busca com Boyer-Moore..." + RESET);
+                    BoyerMoore.boyerMooreStart();
+                    flag = true;
+
                 }
                 else if(casamento ==0){
                     System.out.println("\n" + PURPLE + ">>> Retornando ao menu principal..." + RESET);

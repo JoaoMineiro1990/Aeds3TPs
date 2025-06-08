@@ -3,17 +3,15 @@ package Classes.Casamento;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /*
  * Não distingue maiúsculas de minúsculas
+ * Booyer Moore por bad character
 */
+public class BoyerMoore {
 
-public class KMP {
-
-    public static void kmpStart() {
+    public static void boyerMooreStart() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("\n🔍 Digite o padrão a ser buscado: ");
@@ -38,11 +36,12 @@ public class KMP {
                     continue;
                 }
 
+                // Trata vírgulas dentro de aspas
                 String[] campos = linha.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
                 if (campos.length > 1) {
                     String nome = campos[1].trim();
-                    if (kmpBusca(nome.toLowerCase(), padrao.toLowerCase())) {
+                    if (boyerMooreBusca(nome.toLowerCase(), padrao.toLowerCase())) {
                         resultados.add(nome);
                     }
                 }
@@ -64,53 +63,40 @@ public class KMP {
         }
     }
 
-    // Algoritmo KMP
-    public static boolean kmpBusca(String texto, String padrao) {
-        int[] lps = calcularLPS(padrao);
-        int i = 0; // índice para texto
-        int j = 0; // índice para padrao
+    // Algoritmo Boyer-Moore
+    public static boolean boyerMooreBusca(String texto, String padrao) {
+        Map<Character, Integer> badCharTable = construirBadCharTable(padrao);
+        int tamanhoTexto = texto.length();
+        int tamanhoPadrao = padrao.length();
+        int deslocamento = 0;
 
-        while (i < texto.length()) {
-            if (padrao.charAt(j) == texto.charAt(i)) {
-                i++;
-                j++;
+        while (deslocamento <= (tamanhoTexto - tamanhoPadrao)) {
+            int j = tamanhoPadrao - 1;
+
+            while (j >= 0 && padrao.charAt(j) == texto.charAt(deslocamento + j)) {
+                j--;
             }
 
-            if (j == padrao.length()) {
+            if (j < 0) {
                 return true; // padrão encontrado
-            } else if (i < texto.length() && padrao.charAt(j) != texto.charAt(i)) {
-                if (j != 0) {
-                    j = lps[j - 1];
-                } else {
-                    i++;
-                }
+            } else {
+                char caractereRuim = texto.charAt(deslocamento + j);
+                int ultimaOcorrencia = badCharTable.getOrDefault(caractereRuim, -1);
+                deslocamento += Math.max(1, j - ultimaOcorrencia);
             }
         }
 
-        return false;
+        return false; // padrão não encontrado
     }
 
-    // Pré-processamento do padrão para o algoritmo KMP
-    public static int[] calcularLPS(String padrao) {
-        int[] lps = new int[padrao.length()];
-        int len = 0;
-        int i = 1;
+    // Tabela de caracteres ruins
+    public static Map<Character, Integer> construirBadCharTable(String padrao) {
+        Map<Character, Integer> tabela = new HashMap<>();
 
-        while (i < padrao.length()) {
-            if (padrao.charAt(i) == padrao.charAt(len)) {
-                len++;
-                lps[i] = len;
-                i++;
-            } else {
-                if (len != 0) {
-                    len = lps[len - 1];
-                } else {
-                    lps[i] = 0;
-                    i++;
-                }
-            }
+        for (int i = 0; i < padrao.length(); i++) {
+            tabela.put(padrao.charAt(i), i);
         }
 
-        return lps;
+        return tabela;
     }
 }
