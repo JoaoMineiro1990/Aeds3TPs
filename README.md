@@ -8,7 +8,7 @@ Este projeto implementa um **CRUD** completo de Pokémons utilizando diversas es
 - 🗂️ **Arquivo Binário** para armazenamento principal dos Pokémons.
 - 🪳 **Hash Extensível** para acesso rápido por nome.
 - 🔀 **Lista Invertida** para gerenciamento de Pokémons ativos e atualizações.
-- 🌳 (Planejado) **Árvore B** para gerenciamento eficiente baseado em ID.
+- 🌳 **Árvore B** para gerenciamento eficiente baseado em ID.
 
 Além disso, o sistema conta com **menus interativos** para realizar todas as operações, e com uma camada de **aleatorização inteligente** para buscas mais amigáveis.
 
@@ -102,6 +102,3 @@ Desenvolvido com muito esforço (e um pouquinho de sofrimento 🤣) por:
 - Gabriela Lacerda
 
 ---
-
-**Boa diversão e boas batalhas! 🚀**
-
